@@ -20,6 +20,7 @@ its own license.
 | bzip2 | bzip2 license (BSD-style) | https://sourceware.org/bzip2 |
 | json-c | MIT | https://github.com/json-c/json-c |
 | GCC runtime (libgcc_s, libstdc++, libatomic) | GPL-3.0 with the GCC Runtime Library Exception | https://gcc.gnu.org |
+| Theme sound effects (`themes/Panel Attack Modern/sfx/` except `pop*`) and `characters/__default/chain.ogg` | CC0 1.0, made for this port by `tools/make_sfx.py` (they replace sounds Panel Attack licensed for its own releases only) | this repository |
 | Rubik font | SIL Open Font License 1.1 (`game/miyoo/fonts/OFL-Rubik.txt`) | https://github.com/googlefonts/rubik |
 | Chakra Petch font | SIL Open Font License 1.1 (`game/miyoo/fonts/OFL-ChakraPetch.txt`) | https://github.com/cadsondemak/Chakra-Petch |
 

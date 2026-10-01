@@ -20,7 +20,7 @@ Online play connects to the official Panel Attack server (panelattack.com)
 over Wi-Fi. The first time, set a name with the on-screen keyboard
 (D-pad move, A type, B delete, X case, START done).
 
-Sound is not supported yet.
+Volume: use the handheld's volume buttons, or Options > Audio.
 Saves and settings live in PanelAttack/data. The log of the last run is
 PanelAttack/log.txt; please attach it to bug reports.
 

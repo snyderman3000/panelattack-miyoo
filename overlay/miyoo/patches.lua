@@ -62,6 +62,17 @@ do
   require("miyoo.lobby").install()
 end
 
+-- 4c) Sound: Panel Attack's default volumes (50% master x 50% music/SFX) are
+--     very quiet on the handheld's small speaker. Raise them once; after that
+--     the player's own settings are kept (marker file in the save folder).
+if G_AUDIO_ACTIVE and not love.filesystem.getInfo("miyoo_volume_v1") then
+  config.master_volume = 100
+  config.SFX_volume = 80
+  config.music_volume = 60
+  pcall(write_conf_file)
+  love.filesystem.write("miyoo_volume_v1", "1")
+end
+
 -- 5) Optional frame-time log (PA_PROFILE=1): average update/draw/present per 5 s
 if os.getenv("PA_PROFILE") then
   local inner = CustomRun.innerRun

@@ -21,6 +21,14 @@ export XDG_DATA_HOME="$DIR/data"
 export M2D_LIB="$DIR/lib/libmini2d.so"
 export PA_PROFILE=1
 export PA_VERSION="$(cat "$DIR/VERSION" 2>/dev/null)"
+# Sound: OnionOS plays OSS (/dev/dsp) audio through its audioserver when
+# libpadsp.so is preloaded; OpenAL Soft is pointed at that.
+for p in /customer/lib/libpadsp.so /mnt/SDCARD/miyoo/lib/libpadsp.so /mnt/SDCARD/.tmp_update/lib/libpadsp.so; do
+  if [ -f "$p" ]; then export LD_PRELOAD="$p"; break; fi
+done
+echo "audio: LD_PRELOAD=${LD_PRELOAD:-none} audioserver=$(ps | grep -c [a]udioserver)" >> "$LOG"
+export ALSOFT_CONF="$DIR/alsoft.conf"
+export ALSOFT_LOGLEVEL=2
 export LD_LIBRARY_PATH="$DIR/lib:/config/lib:/customer/lib:$LD_LIBRARY_PATH"
 
 "$DIR/bin/love" "$DIR/game" >> "$LOG" 2>&1

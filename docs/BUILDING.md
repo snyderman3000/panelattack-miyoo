@@ -59,8 +59,10 @@ LOVE_DIR=../love MI_SDK=../sdl2/mini ./build_pkg.sh          # version from ./VE
 ```
 
 Produces `dist/PanelAttack-miyoo-vX.Y.Z.zip` containing `App/PanelAttack`.
-`WITH_AUDIO=1` keeps the music and sound files (they're emptied by default
-because sound isn't supported yet).
+Audio is prepared by `tools/convert_audio.py` (needs `ffmpeg` with libvorbis):
+theme sounds are swapped for the CC0 ones in `sounds/` (regenerate them with
+`python3 tools/make_sfx.py sounds`), character clips are trimmed and everything
+is re-encoded to mono. `NO_AUDIO=1` builds a silent package instead.
 
 ## Testing on a PC
 

@@ -94,7 +94,10 @@ Changes compared with the original source:
         f.write("    " + rel + "\n")
     f.write("""- Removed to save memory: the Simple and Sharp panel sets, the theme's
   background pictures and overlay, the stage background pictures, and tests.
-- Sound and music files are present but empty in builds without audio.
+- Sound: the theme's menu and game sound effects (licensed to official Panel
+  Attack releases only) and the default chain sound are replaced with new
+  public-domain sounds made for this port; character voice clips are trimmed
+  to at most three variants each; all audio is re-encoded to mono.
 
 Panel Attack's license (zlib) and asset credits are in COPYING and COPYING-ASSETS.
 """)

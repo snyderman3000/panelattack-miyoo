@@ -185,99 +185,126 @@ love.event.pump = function(...)
 end
 
 ---------------------------------------------------------------------------
--- love.audio / love.sound (silent for now)
+-- love.audio / love.sound: real OpenAL audio when a device opens, else silent stubs
 ---------------------------------------------------------------------------
--- Sources are userdata (the game checks type(x) == "userdata")
-local Source = {}
-local srcState = setmetatable({}, { __mode = "k" })
-local function makeSource(stype)
-  local u = newproxy(true)
-  local mt = getmetatable(u)
-  mt.__index = Source
-  mt.__tostring = function() return "Source" end
-  srcState[u] = { volume = 1, looping = false, stype = stype or "static", pitch = 1 }
-  return u
+-- The Miyoo has no ALSA; OnionOS exposes sound through OSS (/dev/dsp) when
+-- libpadsp.so is preloaded (launch.sh). OpenAL Soft's OSS backend uses that.
+-- PA_NOSOUND=1 forces the silent stubs.
+local function tryRealAudio()
+  if os.getenv("PA_NOSOUND") then return false, "PA_NOSOUND set" end
+  local ok, snd = pcall(require, "love.sound")
+  if not ok then return false, "love.sound: " .. tostring(snd) end
+  local ok2, aud = pcall(require, "love.audio")
+  if not ok2 then return false, "love.audio: " .. tostring(aud) end
+  love.sound, love.audio = snd, aud
+  -- LÖVE silently falls back to a "null" device when OpenAL can't open one
+  local okDev, dev = pcall(function() return aud.getPlaybackDevice and aud.getPlaybackDevice() end)
+  return true, okDev and tostring(dev) or "?"
 end
-local function newSource(_, stype) return makeSource(stype) end
--- pretend playback state so the game doesn't keep restarting music
-function Source:play() srcState[self].playing = true; return true end
-function Source:stop() srcState[self].playing = false end
-function Source:pause() srcState[self].playing = false end
-function Source:resume() srcState[self].playing = true end
-function Source:isPlaying() return srcState[self].playing == true end
-function Source:isPaused() return false end
-function Source:isStopped() return not srcState[self].playing end
-function Source:setVolume(v) srcState[self].volume = v end
-function Source:getVolume() return srcState[self].volume end
-function Source:setLooping(l) srcState[self].looping = l end
-function Source:isLooping() return srcState[self].looping end
-function Source:setPitch(p) srcState[self].pitch = p end
-function Source:getPitch() return srcState[self].pitch end
-function Source:seek() end
-function Source:tell() return 0 end
-function Source:getDuration() return 0 end
-function Source:clone() return makeSource(srcState[self].stype) end
-function Source:getType() return srcState[self].stype end
-function Source:queue() return true end
-function Source:getFreeBufferCount() return 0 end
-function Source:getChannelCount() return 2 end
-function Source:setPosition() end
-function Source:setRelative() end
-function Source:setAttenuationDistances() end
-function Source:release() return true end
-function Source:typeOf(t) return t == "Source" or t == "Object" end
-function Source:type() return "Source" end
-function Source:setFilter() end
-function Source:setEffect() end
 
-local A = {}
-A.newSource = newSource
-A.newQueueableSource = function() return makeSource("queue") end
-A.play = noop
-A.stop = noop
-A.pause = function() return {} end
-A.resume = noop
-local masterVolume = 1
-A.setVolume = function(v) masterVolume = v end
-A.getVolume = function() return masterVolume end
-A.getActiveSourceCount = function() return 0 end
-A.setPosition = noop
-A.setOrientation = noop
-A.setDistanceModel = noop
-A.getSourceCount = function() return 0 end
-A.isEffectsSupported = function() return false end
-A.setMixWithSystem = function() return false end
-love.audio = A
-package.loaded["love.audio"] = A
+local function installSilentAudio()
+  -- Sources are userdata (the game checks type(x) == "userdata")
+  local Source = {}
+  local srcState = setmetatable({}, { __mode = "k" })
+  local function makeSource(stype)
+    local u = newproxy(true)
+    local mt = getmetatable(u)
+    mt.__index = Source
+    mt.__tostring = function() return "Source" end
+    srcState[u] = { volume = 1, looping = false, stype = stype or "static", pitch = 1 }
+    return u
+  end
+  local function newSource(_, stype) return makeSource(stype) end
+  -- pretend playback state so the game doesn't keep restarting music
+  function Source:play() srcState[self].playing = true; return true end
+  function Source:stop() srcState[self].playing = false end
+  function Source:pause() srcState[self].playing = false end
+  function Source:resume() srcState[self].playing = true end
+  function Source:isPlaying() return srcState[self].playing == true end
+  function Source:isPaused() return false end
+  function Source:isStopped() return not srcState[self].playing end
+  function Source:setVolume(v) srcState[self].volume = v end
+  function Source:getVolume() return srcState[self].volume end
+  function Source:setLooping(l) srcState[self].looping = l end
+  function Source:isLooping() return srcState[self].looping end
+  function Source:setPitch(p) srcState[self].pitch = p end
+  function Source:getPitch() return srcState[self].pitch end
+  function Source:seek() end
+  function Source:tell() return 0 end
+  function Source:getDuration() return 0 end
+  function Source:clone() return makeSource(srcState[self].stype) end
+  function Source:getType() return srcState[self].stype end
+  function Source:queue() return true end
+  function Source:getFreeBufferCount() return 0 end
+  function Source:getChannelCount() return 2 end
+  function Source:setPosition() end
+  function Source:setRelative() end
+  function Source:setAttenuationDistances() end
+  function Source:release() return true end
+  function Source:typeOf(t) return t == "Source" or t == "Object" end
+  function Source:type() return "Source" end
+  function Source:setFilter() end
+  function Source:setEffect() end
 
-local Decoder = {}
-Decoder.__index = Decoder
-function Decoder:decode() return nil end
-function Decoder:getDuration() return 0 end
-function Decoder:seek() end
-function Decoder:getChannelCount() return 2 end
-function Decoder:getSampleRate() return 44100 end
-function Decoder:getBitDepth() return 16 end
-function Decoder:clone() return setmetatable({}, Decoder) end
-function Decoder:release() return true end
-function Decoder:typeOf(t) return t == "Decoder" or t == "Object" end
-local SoundData = {}
-SoundData.__index = SoundData
-function SoundData:getDuration() return 0 end
-function SoundData:getSampleCount() return 0 end
-function SoundData:getSampleRate() return 44100 end
-function SoundData:getBitDepth() return 16 end
-function SoundData:getChannelCount() return 2 end
-function SoundData:getSample() return 0 end
-function SoundData:setSample() end
-function SoundData:getSize() return 0 end
-function SoundData:release() return true end
-function SoundData:typeOf(t) return t == "SoundData" or t == "Object" end
-love.sound = {
-  newDecoder = function() return setmetatable({}, Decoder) end,
-  newSoundData = function() return setmetatable({}, SoundData) end,
-}
-package.loaded["love.sound"] = love.sound
+  local A = {}
+  A.newSource = newSource
+  A.newQueueableSource = function() return makeSource("queue") end
+  A.play = noop
+  A.stop = noop
+  A.pause = function() return {} end
+  A.resume = noop
+  local masterVolume = 1
+  A.setVolume = function(v) masterVolume = v end
+  A.getVolume = function() return masterVolume end
+  A.getActiveSourceCount = function() return 0 end
+  A.setPosition = noop
+  A.setOrientation = noop
+  A.setDistanceModel = noop
+  A.getSourceCount = function() return 0 end
+  A.isEffectsSupported = function() return false end
+  A.setMixWithSystem = function() return false end
+  love.audio = A
+  package.loaded["love.audio"] = A
+
+  local Decoder = {}
+  Decoder.__index = Decoder
+  function Decoder:decode() return nil end
+  function Decoder:getDuration() return 0 end
+  function Decoder:seek() end
+  function Decoder:getChannelCount() return 2 end
+  function Decoder:getSampleRate() return 44100 end
+  function Decoder:getBitDepth() return 16 end
+  function Decoder:clone() return setmetatable({}, Decoder) end
+  function Decoder:release() return true end
+  function Decoder:typeOf(t) return t == "Decoder" or t == "Object" end
+  local SoundData = {}
+  SoundData.__index = SoundData
+  function SoundData:getDuration() return 0 end
+  function SoundData:getSampleCount() return 0 end
+  function SoundData:getSampleRate() return 44100 end
+  function SoundData:getBitDepth() return 16 end
+  function SoundData:getChannelCount() return 2 end
+  function SoundData:getSample() return 0 end
+  function SoundData:setSample() end
+  function SoundData:getSize() return 0 end
+  function SoundData:release() return true end
+  function SoundData:typeOf(t) return t == "SoundData" or t == "Object" end
+  love.sound = {
+    newDecoder = function() return setmetatable({}, Decoder) end,
+    newSoundData = function() return setmetatable({}, SoundData) end,
+  }
+  package.loaded["love.sound"] = love.sound
+
+end
+
+local realAudio, audioInfo = tryRealAudio()
+if realAudio then
+  print("[audio] OpenAL playback device: " .. audioInfo)
+else
+  print("[audio] silent: " .. audioInfo)
+  installSilentAudio()
+end
+G_AUDIO_ACTIVE = realAudio
 
 ---------------------------------------------------------------------------
 -- love.system bits that need a window

@@ -28,9 +28,14 @@ rm -f $OUT/game/pa_conf.lua
 # Windows/mac libraries are useless here
 find $OUT/game \( -name "*.dll" -o -name "*.dylib" \) -delete
 # silent build: keep the audio file names (the game checks they exist) but drop the data
-if [ -z "$WITH_AUDIO" ]; then
+# sound: replace theme sounds we may not redistribute, trim and re-encode the
+# rest (tools/convert_audio.py). NO_AUDIO=1 makes a silent build instead.
+if [ -n "$NO_AUDIO" ]; then
   find $OUT/game \( -name "*.ogg" -o -name "*.mp3" -o -name "*.wav" -o -name "*.flac" \) -exec truncate -s 0 {} +
+else
+  python3 tools/convert_audio.py $OUT/game sounds
 fi
+cp pkgsrc/alsoft.conf $OUT/ 2>/dev/null || true
 cp pkgsrc/* $OUT/
 sed -i 's#:$DIR/libsdl##' $OUT/launch.sh
 echo "$VERSION" > $OUT/VERSION

@@ -21,7 +21,9 @@ Screenshots show Panel Attack art (panels by April93, public domain; characters 
 - **A UI made for the 640×480 screen**: both boards side by side with a centre info column, bigger text, a menu built for a D-pad, and an on-screen keyboard for your name.
 - **Mixtape support**: install and update it from [Mixtape](https://github.com/snyderman3000/mixtape) over Wi-Fi.
 
-Not supported yet: **sound** (the game runs silently), local 2-player.
+- **Sound and music**, through OnionOS's audio service.
+
+Not supported: local 2-player.
 
 ## Install
 
@@ -55,7 +57,8 @@ The Mini Plus has a 1.2 GHz dual-core ARM CPU and no GPU, so the stock LÖVE/Ope
 |---|---|
 | `mini2d/mini2d.c` | Software 2D renderer: premultiplied-alpha blits with per-row opaque/transparent span tables, scale cache, double-buffered present on a separate thread using the SoC's 2D blitter (MI_GFX) to scale, rotate 180° and flip to the screen |
 | `overlay/miyoo/graphics.lua` | `love.graphics` replacement on top of mini2d (images, canvases, fonts, sprite batches, scissor) |
-| `overlay/miyoo/shim.lua` | Window, input (Miyoo buttons → Panel Attack keys) and silent audio stubs |
+| `overlay/miyoo/shim.lua` | Window and input (Miyoo buttons → Panel Attack keys); turns on LÖVE's OpenAL audio, or silent stubs when no sound device opens |
+| `tools/convert_audio.py`, `tools/make_sfx.py`, `sounds/` | Audio prepared for the handheld: re-encoded to mono, trimmed variants, and new CC0 sound effects replacing ones we may not redistribute |
 | `overlay/miyoo/hud.lua` | In-match layout for 640×480 |
 | `overlay/miyoo/menus.lua`, `lobby.lua`, `charselect.lua`, `ui.lua` | Handheld menus, lobby and character select |
 | `overlay/miyoo/osk.lua` | On-screen keyboard |
