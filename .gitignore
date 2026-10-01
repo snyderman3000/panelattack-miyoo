@@ -1,0 +1,5 @@
+/game/
+/pkg/
+/dist/
+/mini2d/*.so
+*.ppm

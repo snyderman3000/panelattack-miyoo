@@ -1,0 +1,6 @@
+{
+  "label": "Panel Attack",
+  "icon": "icon.png",
+  "launch": "launch.sh",
+  "description": "Panel Attack (Tetris Attack clone) - Miyoo port"
+}
