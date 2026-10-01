@@ -8,6 +8,7 @@ LOVE_DIR="${LOVE_DIR:-../love}"
 TOOLCHAIN="${TOOLCHAIN:-/opt/mini}"
 ./build_game.sh
 ./mini2d/build.sh
+./dspfix/build.sh
 OUT=pkg/App/PanelAttack
 rm -rf pkg && mkdir -p $OUT/bin $OUT/lib
 ST=$TOOLCHAIN/bin/arm-linux-gnueabihf-strip
@@ -19,7 +20,7 @@ for n in libatomic.so.1 libbz2.so.1.0 libfreetype.so.6 libgcc_s.so.1 libjson-c.s
   cp -L $S/$n $OUT/lib/$n
 done
 $ST $OUT/lib/*.so* 2>/dev/null || true
-cp mini2d/libmini2d.so $OUT/lib/
+cp mini2d/libmini2d.so dspfix/libdspfix.so $OUT/lib/
 # SDL2 is only used for events/threads/timers (no video), so the plain SDL2
 # from the Miyoo sysroot is enough
 cp -L $S/libSDL2-2.0.so.0 $OUT/lib/

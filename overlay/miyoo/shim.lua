@@ -196,10 +196,23 @@ local function tryRealAudio()
   if not ok then return false, "love.sound: " .. tostring(snd) end
   local ok2, aud = pcall(require, "love.audio")
   if not ok2 then return false, "love.audio: " .. tostring(aud) end
+  -- LÖVE quietly switches to a "null" device when OpenAL can't open one; a
+  -- null source refuses to play, which is how we notice.
+  local okPlay, played = pcall(function()
+    local sd = snd.newSoundData(256, 22050, 16, 1)
+    local src = aud.newSource(sd, "static")
+    src:setVolume(0)
+    local r = src:play()
+    src:stop()
+    src:release()
+    return r
+  end)
+  if not (okPlay and played) then
+    package.loaded["love.audio"], package.loaded["love.sound"] = nil, nil
+    return false, "no playback device (" .. tostring(played) .. ")"
+  end
   love.sound, love.audio = snd, aud
-  -- LÖVE silently falls back to a "null" device when OpenAL can't open one
-  local okDev, dev = pcall(function() return aud.getPlaybackDevice and aud.getPlaybackDevice() end)
-  return true, okDev and tostring(dev) or "?"
+  return true, "OpenAL"
 end
 
 local function installSilentAudio()
@@ -299,7 +312,7 @@ end
 
 local realAudio, audioInfo = tryRealAudio()
 if realAudio then
-  print("[audio] OpenAL playback device: " .. audioInfo)
+  print("[audio] playing through " .. audioInfo)
 else
   print("[audio] silent: " .. audioInfo)
   installSilentAudio()

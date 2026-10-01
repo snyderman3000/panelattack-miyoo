@@ -3,3 +3,4 @@
 /dist/
 /mini2d/*.so
 *.ppm
+/dspfix/*.so

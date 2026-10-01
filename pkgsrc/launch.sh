@@ -24,11 +24,12 @@ export PA_VERSION="$(cat "$DIR/VERSION" 2>/dev/null)"
 # Sound: OnionOS plays OSS (/dev/dsp) audio through its audioserver when
 # libpadsp.so is preloaded; OpenAL Soft is pointed at that.
 for p in /customer/lib/libpadsp.so /mnt/SDCARD/miyoo/lib/libpadsp.so /mnt/SDCARD/.tmp_update/lib/libpadsp.so; do
-  if [ -f "$p" ]; then export LD_PRELOAD="$p"; break; fi
+  # libdspfix forwards open64("/dev/dsp") (used by OpenAL) to libpadsp's open()
+  if [ -f "$p" ]; then export LD_PRELOAD="$DIR/lib/libdspfix.so $p"; break; fi
 done
 echo "audio: LD_PRELOAD=${LD_PRELOAD:-none} audioserver=$(ps | grep -c [a]udioserver)" >> "$LOG"
 export ALSOFT_CONF="$DIR/alsoft.conf"
-export ALSOFT_LOGLEVEL=2
+export ALSOFT_LOGLEVEL=3
 export LD_LIBRARY_PATH="$DIR/lib:/config/lib:/customer/lib:$LD_LIBRARY_PATH"
 
 "$DIR/bin/love" "$DIR/game" >> "$LOG" 2>&1
