@@ -73,6 +73,19 @@ if G_AUDIO_ACTIVE and not love.filesystem.getInfo("miyoo_volume_v1") then
   love.filesystem.write("miyoo_volume_v1", "1")
 end
 
+-- 4d) Release builds: the FPS counter was on by default in the test builds;
+--     switch it off once (it stays available in Options > General), and keep
+--     Panel Attack's log to warnings and errors unless PA_DEBUG is set.
+if not love.filesystem.getInfo("miyoo_fps_off_v1") then
+  config.show_fps = false
+  pcall(write_conf_file)
+  love.filesystem.write("miyoo_fps_off_v1", "1")
+end
+if not os.getenv("PA_DEBUG") then
+  local logger = require("common.lib.logger")
+  logger.setLogLevel(logger.levels.WARN)
+end
+
 -- 5) Optional frame-time log (PA_PROFILE=1): average update/draw/present per 5 s
 if os.getenv("PA_PROFILE") then
   local inner = CustomRun.innerRun

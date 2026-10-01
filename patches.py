@@ -33,9 +33,6 @@ end'''),
     ("client/src/config.lua",
      "    discordCommunityShown         = false,",
      "    discordCommunityShown         = true,"),
-    ("client/src/config.lua",
-     "    show_fps                      = false,",
-     "    show_fps                      = true,"),
     # Memory: Stack.lua preallocates ~44,000 rollback tables (~35 MB) at startup
     # to smooth garbage collection on PCs. The Miyoo has ~100 MB of RAM in total,
     # so allocate them on demand instead (only online matches need them).
