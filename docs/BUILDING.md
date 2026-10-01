@@ -79,7 +79,9 @@ python3 tools/tile.py /tmp/shot.png 0 10                # combine frames into a 
 
 ## Releasing
 
-1. Bump `VERSION`, add `docs/releases/vX.Y.Z.md`.
-2. Build the zip, tag `vX.Y.Z`, and publish a GitHub release with the zip
-   attached and the notes as the description. Mixtape installs the release
-   asset whose name contains `miyoo`.
+1. Bump `VERSION`, add `docs/releases/vX.Y.Z.md`, commit to `main`.
+2. Build the zip (`./build_pkg.sh`).
+3. Add `PanelAttack-miyoo-vX.Y.Z.zip` and the notes (as `notes-vX.Y.Z.md`)
+   to the `builds` branch and push it. Its `publish.yml` workflow tags
+   `vX.Y.Z` on `main` and publishes the GitHub release with the zip attached.
+   Mixtape installs the release asset whose name contains `miyoo`.
