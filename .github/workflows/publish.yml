@@ -30,6 +30,13 @@ jobs:
             fi
             notes="notes-$tag.md"
             [ -f "$notes" ] || { echo "::error::missing $notes"; exit 1; }
-            gh release create "$tag" "$zip" --target main \
+            gh release create "$tag" "$zip" sources/* --target main \
               --title "Panel Attack for Miyoo Mini Plus $tag" --notes-file "$notes"
+          done
+          # source code the license requires next to each release (LGPL: OpenAL Soft)
+          for tag in $(gh release list --limit 100 --json tagName --jq '.[].tagName'); do
+            have=$(gh release view "$tag" --json assets --jq '.assets[].name')
+            for f in sources/*; do
+              echo "$have" | grep -qx "$(basename "$f")" || gh release upload "$tag" "$f"
+            done
           done
