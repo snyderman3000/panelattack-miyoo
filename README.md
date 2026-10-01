@@ -2,12 +2,16 @@
 
 **[Panel Attack](https://github.com/panel-attack/panel-game) (the free Tetris Attack / Puzzle League clone) running on the Miyoo Mini Plus under OnionOS, with online play against PC players on the official server.**
 
+> **Unofficial.** This is a modified version of Panel Attack for one handheld, not affiliated with the Panel Attack team. Please report problems with this port here, not to them. The full list of changes ships in the game folder as `MODIFIED.txt`.
+
 > 🤖 **Built by Claude.** This port was designed and written by [Claude](https://claude.ai), Anthropic's AI model, at the request of [@snyderman3000](https://github.com/snyderman3000). He came up with the idea, chose the direction and tested every build on real hardware. Claude wrote the code, the renderer, the handheld UI and the documentation. Please report bugs through [Issues](https://github.com/snyderman3000/panelattack-miyoo/issues).
 
 | | |
 |---|---|
 | ![Online match](docs/cover.png) | ![Endless](docs/endless.png) |
 | ![Main menu](docs/menu.png) | ![Online lobby](docs/lobby.png) |
+
+Screenshots show Panel Attack art (panels by April93, public domain; characters by Gaster and JamBox, CC BY-SA 4.0). Full credits: [COPYING-ASSETS](https://github.com/panel-attack/panel-game/blob/main/COPYING-ASSETS).
 
 ## Features
 

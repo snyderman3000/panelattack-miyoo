@@ -12,7 +12,7 @@ its own license.
 | LÖVE 11.5 | zlib | https://github.com/love2d/love |
 | LuaJIT 2.1 | MIT | https://github.com/LuaJIT/LuaJIT |
 | SDL2 (from the Miyoo Mini toolchain) | zlib | https://github.com/steward-fu/sdl2 |
-| OpenAL Soft | LGPL-2.1-or-later, dynamically linked and unmodified | https://github.com/kcat/openal-soft |
+| OpenAL Soft 1.21.1 | LGPL-2.1-or-later, dynamically linked | https://github.com/kcat/openal-soft (source attached to every release as `openal-soft-1.21.1-source.tar.gz`) |
 | FreeType | FreeType License (FTL) | https://freetype.org |
 | libpng, zlib | libpng / zlib licenses | http://www.libpng.org, https://zlib.net |
 | libogg, libvorbis, libtheora | BSD-3-Clause | https://xiph.org |
@@ -25,4 +25,6 @@ its own license.
 
 The shared libraries above come unmodified from the Miyoo Mini toolchain
 sysroot (steward-fu's `mini_toolchain`). OpenAL Soft is loaded as a separate
-shared library, so it can be replaced with any compatible build.
+shared library (`lib/libopenal.so.1`), so it can be replaced with any
+compatible build. Its complete source code is attached to each GitHub release
+of this port.

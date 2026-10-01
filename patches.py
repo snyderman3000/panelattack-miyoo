@@ -56,7 +56,10 @@ end'''),
      '''if not config.name or config.name == "" then switchToScene(SetNameMenu()) else switchToScene(Lobby({serverIp = os.getenv("PA_SERVER") or "panelattack.com", serverPort = tonumber(os.getenv("PA_SERVER_PORT") or "")})) end'''),
 ]
 
+MARK = "-- Modified for the Miyoo Mini Plus port (https://github.com/snyderman3000/panelattack-miyoo); see MODIFIED.txt\n"
+
 failed = False
+changed = []
 for rel, old, new in PATCHES:
     p = os.path.join(GAME, rel)
     s = open(p, encoding="utf-8").read()
@@ -66,6 +69,35 @@ for rel, old, new in PATCHES:
         failed = True
         continue
     s = s.replace(old, new)
+    if not s.startswith(MARK):
+        s = MARK + s
+    if rel not in changed:
+        changed.append(rel)
     open(p, "w", encoding="utf-8").write(s)
+# zlib license, clause 2: altered versions must be plainly marked as such
+with open(os.path.join(GAME, "MODIFIED.txt"), "w", encoding="utf-8") as f:
+    f.write("""This is a MODIFIED version of Panel Attack, not the original software.
+
+It is an unofficial port to the Miyoo Mini Plus (OnionOS), made by
+snyderman3000 with Claude (Anthropic) and not affiliated with the Panel Attack
+team. Original game: https://github.com/panel-attack/panel-game
+Port source and the full list of changes: https://github.com/snyderman3000/panelattack-miyoo
+
+Changes compared with the original source:
+- main.lua was renamed to pa_main.lua; a new main.lua and conf.lua start the
+  Miyoo layer first.
+- Added: miyoo/ (renderer bindings, graphics/input/audio replacements,
+  handheld UI, on-screen keyboard, runtime patches) and the fonts in miyoo/fonts.
+- Edited (each file is marked at the top):
+""")
+    for rel in changed:
+        f.write("    " + rel + "\n")
+    f.write("""- Removed to save memory: the Simple and Sharp panel sets, the theme's
+  background pictures and overlay, the stage background pictures, and tests.
+- Sound and music files are present but empty in builds without audio.
+
+Panel Attack's license (zlib) and asset credits are in COPYING and COPYING-ASSETS.
+""")
+
 print("patches: %d applied%s" % (len(PATCHES), ", SOME FAILED" if failed else ""))
 sys.exit(1 if failed else 0)

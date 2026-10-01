@@ -1,6 +1,9 @@
 Panel Attack for Miyoo Mini Plus (OnionOS)
 https://github.com/snyderman3000/panelattack-miyoo
 
+This is an unofficial, MODIFIED version of Panel Attack, made for the Miyoo
+Mini Plus and not affiliated with the Panel Attack team. See game/MODIFIED.txt.
+
 Install: copy the App folder to the root of the SD card (or install it with
 Mixtape). Launch "Panel Attack" from Apps.
 
@@ -22,4 +25,5 @@ Saves and settings live in PanelAttack/data. The log of the last run is
 PanelAttack/log.txt; please attach it to bug reports.
 
 Panel Attack is free software (zlib license): https://github.com/panel-attack/panel-game
-Licenses for everything in this package are in the licenses folder.
+Panel Attack's license and asset credits: game/COPYING, game/COPYING-ASSETS.
+Licenses for everything else in this package are in the licenses folder.
