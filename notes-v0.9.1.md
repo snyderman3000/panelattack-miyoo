@@ -1,0 +1,2 @@
+- The title screen and main menu now say clearly that this is an **unofficial port**, not affiliated with or supported by the Panel Attack team.
+- **Online play is turned off for now** while we check with the Panel Attack team that they're happy for this port to use their server. The online code is unchanged; the switch is `online.cfg` in the game folder (`Roms/PORTS/Games/PanelAttack`).
