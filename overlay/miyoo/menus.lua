@@ -144,6 +144,7 @@ local function titleDraw(self)
   local bottom = drawLogo(U.W / 2, 70, true)
   local a = ((math.sin(5 * love.timer.getTime()) / 2 + .5) ^ .5) / 2 + .5
   U.text(loc("continue_button"), U.W / 2, bottom + 40, U.font("medium", 18), C.text, "center", nil, nil, a)
+  U.text("Unofficial port · not affiliated with the Panel Attack team", U.W / 2, 426, U.font("regular", 12), C.muted, "center")
   U.text(versionString(), U.W / 2, 450, U.font("regular", 12), C.faint, "center")
   U.reset()
 end
@@ -168,8 +169,11 @@ local MAIN_NAMES = {
 
 local function mainMenuDraw(self)
   Flat.draw({ color = C.bg })
-  drawLogo(32, 96, false)
-  U.text(versionString(), 32, 370, U.font("regular", 13), C.muted)
+  local bottom = drawLogo(32, 96, false)
+  U.text("UNOFFICIAL PORT", 32, bottom + 6, U.font("bold", 13), C.amber, nil, nil, 1)
+  U.text("Not affiliated with or supported", 32, bottom + 26, U.font("regular", 12), C.muted)
+  U.text("by the Panel Attack team", 32, bottom + 42, U.font("regular", 12), C.muted)
+  U.text(versionString(), 32, 400, U.font("regular", 13), C.muted)
 
   local name = config.name and config.name ~= "" and config.name or "No name set"
   U.text(U.fit(name, U.font("regular", 14), 280), U.W - 24, 10, U.font("regular", 14), C.muted, "right")
@@ -254,6 +258,8 @@ function M.install()
       local it = menu.menuItems[i]
       local key = it.textButton and it.textButton.label and it.textButton.label.text
       if key == "mm_2_vs_local" then menu:removeMenuItem(it.id) end
+      -- Online play is off unless online.cfg says "online = on" (launch.sh exports PA_ONLINE)
+      if key == "mm_2_vs_online" and os.getenv("PA_ONLINE") ~= "on" then menu:removeMenuItem(it.id) end
     end
     return menu
   end

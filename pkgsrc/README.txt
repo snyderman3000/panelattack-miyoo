@@ -19,9 +19,9 @@ Controls
   Select         back
   Select+Start   quit
 
-Online play connects to the official Panel Attack server (panelattack.com)
-over Wi-Fi. The first time, set a name with the on-screen keyboard
-(D-pad move, A type, B delete, X case, START done).
+Online play is turned off in this version while we check with the Panel
+Attack team that they're happy for this port to use their server. (For
+testing: edit online.cfg in this folder and change "off" to "on".)
 
 Volume: use the handheld's volume buttons, or Options > Audio.
 Saves and settings live in Roms/PORTS/Games/PanelAttack/data. The log of the last run is

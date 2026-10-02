@@ -1,6 +1,8 @@
 # Panel Attack for Miyoo Mini Plus
 
-**[Panel Attack](https://github.com/panel-attack/panel-game) (the free Tetris Attack / Puzzle League clone) running on the Miyoo Mini Plus under OnionOS, with online play against PC players on the official server.**
+**[Panel Attack](https://github.com/panel-attack/panel-game) (the free Tetris Attack / Puzzle League clone) running on the Miyoo Mini Plus under OnionOS.**
+
+> **Unofficial port**, not affiliated with or supported by the Panel Attack team. **Online play is turned off for now** while we check with the Panel Attack team that they're happy for this port to use their server; the code is all still there (switch: `online.cfg` in the game folder).
 
 > **Unofficial.** This is a modified version of Panel Attack for one handheld, not affiliated with the Panel Attack team. Please report problems with this port here, not to them. The full list of changes ships in the game folder as `MODIFIED.txt`.
 
@@ -15,7 +17,7 @@ Screenshots show Panel Attack art (panels by April93, public domain; characters 
 
 ## Features
 
-- **Online versus** on panelattack.com over Wi-Fi: lobby, challenges, ranked and casual matches, rollback when the connection hiccups. Plays against PC and other handheld players.
+- **Online versus** (currently switched off, see above) on panelattack.com over Wi-Fi: lobby, challenges, ranked and casual matches, rollback when the connection hiccups. Plays against PC and other handheld players.
 - **Endless, Time Attack, Vs Yourself, Puzzles, Training and Challenge** modes.
 - **60 fps** on the Mini Plus thanks to a custom 2D renderer (no GPU needed).
 - **A UI made for the 640×480 screen**: both boards side by side with a centre info column, bigger text, a menu built for a D-pad, and an on-screen keyboard for your name.
@@ -33,7 +35,7 @@ Not supported: local 2-player.
 
 1. Download `PanelAttack-miyoo-vX.Y.Z.zip` from [Releases](https://github.com/snyderman3000/panelattack-miyoo/releases).
 2. Extract it and copy the `Roms` folder to the root of your SD card, merging it with the `Roms` folder already there. Coming from a version before 0.9.0 (which lived in Apps)? The first launch moves your settings over and removes the old Apps entry.
-3. Open **Games → Ports → Panel Attack**. (The Ports list needs OnionOS's "Ports" system from Package Manager → Verified.) For online play, turn Wi-Fi on and set a name first.
+3. Open **Games → Ports → Panel Attack**. (The Ports list needs OnionOS's "Ports" system from Package Manager → Verified.)
 
 Requires OnionOS on a Miyoo Mini Plus. Online play needs the Plus (or another Wi-Fi model).
 

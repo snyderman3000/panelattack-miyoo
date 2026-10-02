@@ -29,6 +29,10 @@ export M2D_LIB="$DIR/lib/libmini2d.so"
 # Troubleshooting: PA_PROFILE=1 logs frame times, PA_DEBUG=1 logs everything
 # export PA_PROFILE=1
 # export PA_DEBUG=1
+# Online play: off unless online.cfg says "online = on"
+PA_ONLINE="$(sed -n 's/^[[:space:]]*online[[:space:]]*=[[:space:]]*\([A-Za-z]*\).*/\1/p' "$DIR/online.cfg" 2>/dev/null | head -1 | tr 'A-Z' 'a-z')"
+export PA_ONLINE
+echo "online play: ${PA_ONLINE:-off}" >> "$LOG"
 export PA_VERSION="$(cat "$DIR/VERSION" 2>/dev/null)"
 # Sound: OnionOS plays OSS (/dev/dsp) audio through its audioserver when
 # libpadsp.so is preloaded; OpenAL Soft is pointed at that.
