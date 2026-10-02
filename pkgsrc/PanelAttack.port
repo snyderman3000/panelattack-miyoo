@@ -1,3 +1,13 @@
 #!/bin/sh
 # Panel Attack for Miyoo Mini Plus (https://github.com/snyderman3000/panelattack-miyoo)
-/mnt/SDCARD/Roms/PORTS/Games/PanelAttack/launch.sh
+# Standalone Ports Script Template
+
+GameName="Panel Attack"
+GameDir="PanelAttack"
+GameExecutable="launch.sh"
+GameDataFile="launch.sh"
+KillAudioserver=0
+PerformanceMode=0
+Arguments=""
+
+/mnt/SDCARD/Emu/PORTS/launch_standalone.sh "$GameName" "$GameDir" "$GameExecutable" "$Arguments" "$GameDataFile" "$KillAudioserver" "$PerformanceMode"

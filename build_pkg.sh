@@ -48,7 +48,9 @@ ZIP="PanelAttack-miyoo-v$VERSION.zip"
 mkdir -p dist
 # Ports list entry + box art
 mkdir -p "pkg/Roms/PORTS/Shortcuts/Puzzle games" pkg/Roms/PORTS/Imgs
+# both names: OnionOS's "Import ports" prefers the .notfound copy and turns it into .port
 cp pkgsrc/PanelAttack.port "pkg/Roms/PORTS/Shortcuts/Puzzle games/Panel Attack.port"
+cp pkgsrc/PanelAttack.port "pkg/Roms/PORTS/Shortcuts/Puzzle games/Panel Attack.notfound"
 python3 -c "from PIL import Image; Image.open('docs/cover.png').convert('RGB').resize((320, 240), Image.LANCZOS).save('pkg/Roms/PORTS/Imgs/Panel Attack.png')"
 rm -f $OUT/PanelAttack.port
 (cd pkg && rm -f "../dist/$ZIP" && zip -qr9 "../dist/$ZIP" Roms)
