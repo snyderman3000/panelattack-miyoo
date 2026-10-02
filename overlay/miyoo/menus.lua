@@ -144,8 +144,11 @@ local function titleDraw(self)
   local bottom = drawLogo(U.W / 2, 70, true)
   local a = ((math.sin(5 * love.timer.getTime()) / 2 + .5) ^ .5) / 2 + .5
   U.text(loc("continue_button"), U.W / 2, bottom + 40, U.font("medium", 18), C.text, "center", nil, nil, a)
-  U.text("Unofficial port · not affiliated with the Panel Attack team", U.W / 2, 426, U.font("regular", 12), C.muted, "center")
-  U.text(versionString(), U.W / 2, 450, U.font("regular", 12), C.faint, "center")
+  local sf = U.font("regular", 12)
+  U.text("Panel Attack is made by the Panel Attack team · panelattack.com", U.W / 2, 392, sf, C.muted, "center")
+  U.text("UNOFFICIAL modified port, not affiliated with or supported by them; it may have bugs.", U.W / 2, 410, sf, C.amber, "center")
+  U.text("Report bugs at github.com/snyderman3000/panelattack-miyoo, not to the Panel Attack team.", U.W / 2, 428, sf, C.muted, "center")
+  U.text(versionString(), U.W / 2, 452, sf, C.faint, "center")
   U.reset()
 end
 
@@ -169,11 +172,22 @@ local MAIN_NAMES = {
 
 local function mainMenuDraw(self)
   Flat.draw({ color = C.bg })
-  local bottom = drawLogo(32, 96, false)
+  local bottom = drawLogo(32, 52, false)
   U.text("UNOFFICIAL PORT", 32, bottom + 6, U.font("bold", 13), C.amber, nil, nil, 1)
-  U.text("Not affiliated with or supported", 32, bottom + 26, U.font("regular", 12), C.muted)
-  U.text("by the Panel Attack team", 32, bottom + 42, U.font("regular", 12), C.muted)
-  U.text(versionString(), 32, 400, U.font("regular", 13), C.muted)
+  local sf = U.font("regular", 12)
+  local lines = {
+    "Panel Attack is made by the Panel",
+    "Attack team (panelattack.com). This",
+    "modified port is not affiliated with",
+    "or supported by them and may have",
+    "bugs. Please report them to:",
+  }
+  for i, l in ipairs(lines) do
+    U.text(l, 32, bottom + 10 + 16 * i, sf, C.muted)
+  end
+  U.text("github.com/snyderman3000/", 32, bottom + 14 + 16 * (#lines + 1), sf, C.text)
+  U.text("panelattack-miyoo", 32, bottom + 14 + 16 * (#lines + 2), sf, C.text)
+  U.text(versionString(), 32, bottom + 22 + 16 * (#lines + 3), sf, C.faint)
 
   local name = config.name and config.name ~= "" and config.name or "No name set"
   U.text(U.fit(name, U.font("regular", 14), 280), U.W - 24, 10, U.font("regular", 14), C.muted, "right")

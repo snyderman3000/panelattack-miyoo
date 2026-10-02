@@ -2,9 +2,13 @@
 
 **[Panel Attack](https://github.com/panel-attack/panel-game) (the free Tetris Attack / Puzzle League clone) running on the Miyoo Mini Plus under OnionOS.**
 
-> **Unofficial port**, not affiliated with or supported by the Panel Attack team. **Online play is turned off for now** while we check with the Panel Attack team that they're happy for this port to use their server; the code is all still there (switch: `online.cfg` in the game folder).
-
-> **Unofficial.** This is a modified version of Panel Attack for one handheld, not affiliated with the Panel Attack team. Please report problems with this port here, not to them. The full list of changes ships in the game folder as `MODIFIED.txt`.
+> [!IMPORTANT]
+> **This is an unofficial, modified port. It is not made, endorsed or supported by the Panel Attack team.**
+>
+> - **The original game:** [Panel Attack](https://panelattack.com) is made by the Panel Attack team ([source](https://github.com/panel-attack/panel-game), zlib license). All credit for the game, its design and its art goes to them and to the artists listed in [COPYING-ASSETS](https://github.com/panel-attack/panel-game/blob/main/COPYING-ASSETS).
+> - **This port changes their code** to run on the Miyoo Mini Plus (a new renderer, a new handheld UI, memory and sound changes, and more). Those changes **may have bugs that the real game doesn't have.** The full list of changes ships in the game folder as `MODIFIED.txt`.
+> - **Please report every problem with this port [here](https://github.com/snyderman3000/panelattack-miyoo/issues), never to the Panel Attack team** (not on their GitHub, not on their Discord). The port never sends crash reports to the Panel Attack server; crashes show a message pointing here instead.
+> - **Online play is turned off for now** while we check with the Panel Attack team that they're happy for this port to use their server. The code is still there (switch: `online.cfg` in the game folder).
 
 > 🤖 **Built by Claude.** This port was designed and written by [Claude](https://claude.ai), Anthropic's AI model, at the request of [@snyderman3000](https://github.com/snyderman3000). He came up with the idea, chose the direction and tested every build on real hardware. Claude wrote the code, the renderer, the handheld UI and the documentation. Please report bugs through [Issues](https://github.com/snyderman3000/panelattack-miyoo/issues).
 

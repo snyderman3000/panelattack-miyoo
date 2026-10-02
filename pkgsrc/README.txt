@@ -1,8 +1,14 @@
 Panel Attack for Miyoo Mini Plus (OnionOS)
 https://github.com/snyderman3000/panelattack-miyoo
 
-This is an unofficial, MODIFIED version of Panel Attack, made for the Miyoo
-Mini Plus and not affiliated with the Panel Attack team. See game/MODIFIED.txt.
+UNOFFICIAL PORT. Panel Attack is made by the Panel Attack team
+(https://panelattack.com, https://github.com/panel-attack/panel-game).
+This is a MODIFIED version of their game, made for the Miyoo Mini Plus and
+not made, endorsed or supported by the Panel Attack team. The changes may
+have bugs that the real game doesn't have: please report every problem at
+https://github.com/snyderman3000/panelattack-miyoo/issues, never to the
+Panel Attack team. This port never sends crash reports to their server.
+The full list of changes is in game/MODIFIED.txt.
 
 Install: copy the Roms folder to the root of the SD card (or install it with
 Mixtape). Launch "Panel Attack" from Games > Ports (OnionOS needs the
@@ -25,7 +31,8 @@ testing: edit online.cfg in this folder and change "off" to "on".)
 
 Volume: use the handheld's volume buttons, or Options > Audio.
 Saves and settings live in Roms/PORTS/Games/PanelAttack/data. The log of the last run is
-Roms/PORTS/Games/PanelAttack/log.txt; please attach it to bug reports.
+Roms/PORTS/Games/PanelAttack/log.txt; please attach it to bug reports
+(at the GitHub link above).
 
 Panel Attack is free software (zlib license): https://github.com/panel-attack/panel-game
 Panel Attack's license and asset credits: game/COPYING, game/COPYING-ASSETS.

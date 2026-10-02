@@ -51,9 +51,21 @@ end'''),
     ("client/src/scenes/MainMenu.lua",
      '''switchToScene(Lobby({serverIp = "panelattack.com"}))''',
      '''if not config.name or config.name == "" then switchToScene(SetNameMenu()) else switchToScene(Lobby({serverIp = os.getenv("PA_SERVER") or "panelattack.com", serverPort = tonumber(os.getenv("PA_SERVER_PORT") or "")})) end'''),
+    # Crash reports: never send them to the Panel Attack server. This port is
+    # modified, so its crashes are ours to fix, not the Panel Attack team's.
+    ("pa_main.lua",
+     '''    if GAME.updater and not DEBUG_ENABLED and not os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") then
+      GAME.netClient:sendErrorReport(errorData, consts.SERVER_LOCATION, 49569)
+    end
+''',
+     '''    -- miyoo: crash reports are never sent to the Panel Attack server
+'''),
+    ("pa_main.lua",
+     '''"Error: Please share your crash.log with the developers to get help with this!\\n"''',
+     '''"Error: this is the UNOFFICIAL Miyoo Mini Plus port of Panel Attack.\\nPlease report this crash at github.com/snyderman3000/panelattack-miyoo/issues\\n(attach Roms/PORTS/Games/PanelAttack/log.txt), NOT to the Panel Attack team.\\n"'''),
 ]
 
-MARK = "-- Modified for the Miyoo Mini Plus port (https://github.com/snyderman3000/panelattack-miyoo); see MODIFIED.txt\n"
+MARK ="-- Modified for the Miyoo Mini Plus port (https://github.com/snyderman3000/panelattack-miyoo); see MODIFIED.txt\n"
 
 failed = False
 changed = []
@@ -80,11 +92,19 @@ snyderman3000 with Claude (Anthropic) and not affiliated with the Panel Attack
 team. Original game: https://github.com/panel-attack/panel-game
 Port source and the full list of changes: https://github.com/snyderman3000/panelattack-miyoo
 
+These changes may have introduced bugs that the original game does not have.
+Report every problem with this port at
+https://github.com/snyderman3000/panelattack-miyoo/issues, never to the Panel
+Attack team. This port never sends crash reports to the Panel Attack server.
+
 Changes compared with the original source:
 - main.lua was renamed to pa_main.lua; a new main.lua and conf.lua start the
   Miyoo layer first.
 - Added: miyoo/ (renderer bindings, graphics/input/audio replacements,
   handheld UI, on-screen keyboard, runtime patches) and the fonts in miyoo/fonts.
+- Crash reports are not sent to the Panel Attack server, and the crash
+  screen points to this port's issue tracker.
+- Online play is off unless online.cfg turns it on.
 - Edited (each file is marked at the top):
 """)
     for rel in changed:
