@@ -10,8 +10,8 @@
 
 | | |
 |---|---|
-| ![Online match](docs/cover.png) | ![Endless](docs/endless.png) |
-| ![Main menu](docs/menu.png) | ![Online lobby](docs/lobby.png) |
+| ![Title screen](docs/title.png) | ![Main menu](docs/menu.png) |
+| ![Endless](docs/endless.png) | ![Character select](docs/charselect.png) |
 
 Screenshots show Panel Attack art (panels by April93, public domain; characters by Gaster and JamBox, CC BY-SA 4.0). Full credits: [COPYING-ASSETS](https://github.com/panel-attack/panel-game/blob/main/COPYING-ASSETS).
 
