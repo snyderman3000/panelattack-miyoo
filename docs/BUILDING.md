@@ -58,7 +58,7 @@ changed.
 LOVE_DIR=../love MI_SDK=../sdl2/mini ./build_pkg.sh          # version from ./VERSION
 ```
 
-Produces `dist/PanelAttack-miyoo-vX.Y.Z.zip` containing `App/PanelAttack`.
+Produces `dist/PanelAttack-miyoo-vX.Y.Z.zip` containing `Roms/PORTS/Games/PanelAttack`, its Ports list entry and box art.
 Audio is prepared by `tools/convert_audio.py` (needs `ffmpeg` with libvorbis):
 theme sounds are swapped for the CC0 ones in `sounds/` (regenerate them with
 `python3 tools/make_sfx.py sounds`), character clips are trimmed and everything

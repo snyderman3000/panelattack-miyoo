@@ -2,6 +2,13 @@
 # Panel Attack for Miyoo Mini Plus (OnionOS)
 DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$DIR"
+
+# Versions before 0.9.0 lived in Apps: bring the old settings over, then remove it
+OLD=/mnt/SDCARD/App/PanelAttack
+if [ -d "$OLD" ] && [ "$OLD" != "$DIR" ]; then
+  if [ -d "$OLD/data" ] && [ ! -d "$DIR/data" ]; then mv "$OLD/data" "$DIR/data"; fi
+  rm -rf "$OLD"
+fi
 LOG="$DIR/log.txt"
 CPU=/sys/devices/system/cpu/cpu0/cpufreq
 
@@ -25,7 +32,8 @@ export M2D_LIB="$DIR/lib/libmini2d.so"
 export PA_VERSION="$(cat "$DIR/VERSION" 2>/dev/null)"
 # Sound: OnionOS plays OSS (/dev/dsp) audio through its audioserver when
 # libpadsp.so is preloaded; OpenAL Soft is pointed at that.
-for p in /customer/lib/libpadsp.so /mnt/SDCARD/miyoo/lib/libpadsp.so /mnt/SDCARD/.tmp_update/lib/libpadsp.so; do
+# (OnionOS's own copy first, so add-ons that hook it, like MiniAmp's music in games, apply here too)
+for p in /mnt/SDCARD/miyoo/lib/libpadsp.so /customer/lib/libpadsp.so /mnt/SDCARD/.tmp_update/lib/libpadsp.so; do
   # libdspfix forwards open64("/dev/dsp") (used by OpenAL) to libpadsp's open()
   if [ -f "$p" ]; then export LD_PRELOAD="$DIR/lib/libdspfix.so $p"; break; fi
 done

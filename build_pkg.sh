@@ -1,5 +1,5 @@
 #!/bin/sh
-# Assemble App/PanelAttack for the SD card and zip it.
+# Assemble Roms/PORTS/Games/PanelAttack (OnionOS Ports) for the SD card and zip it.
 set -e
 cd "$(dirname "$0")"
 VERSION="${1:-$(cat VERSION)}"
@@ -9,7 +9,7 @@ TOOLCHAIN="${TOOLCHAIN:-/opt/mini}"
 ./build_game.sh
 ./mini2d/build.sh
 ./dspfix/build.sh
-OUT=pkg/App/PanelAttack
+OUT=pkg/Roms/PORTS/Games/PanelAttack
 rm -rf pkg && mkdir -p $OUT/bin $OUT/lib
 ST=$TOOLCHAIN/bin/arm-linux-gnueabihf-strip
 cp "$LOVE_DIR/src/.libs/love" $OUT/bin/love
@@ -46,5 +46,10 @@ cp THIRD_PARTY_NOTICES.md $OUT/licenses/
 chmod +x $OUT/launch.sh $OUT/bin/love
 ZIP="PanelAttack-miyoo-v$VERSION.zip"
 mkdir -p dist
-(cd pkg && rm -f "../dist/$ZIP" && zip -qr9 "../dist/$ZIP" App)
+# Ports list entry + box art
+mkdir -p "pkg/Roms/PORTS/Shortcuts/Puzzle games" pkg/Roms/PORTS/Imgs
+cp pkgsrc/PanelAttack.port "pkg/Roms/PORTS/Shortcuts/Puzzle games/Panel Attack.port"
+python3 -c "from PIL import Image; Image.open('docs/cover.png').convert('RGB').resize((320, 240), Image.LANCZOS).save('pkg/Roms/PORTS/Imgs/Panel Attack.png')"
+rm -f $OUT/PanelAttack.port
+(cd pkg && rm -f "../dist/$ZIP" && zip -qr9 "../dist/$ZIP" Roms)
 du -sh $OUT; ls -la "dist/$ZIP"

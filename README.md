@@ -32,8 +32,8 @@ Not supported: local 2-player.
 **By hand:**
 
 1. Download `PanelAttack-miyoo-vX.Y.Z.zip` from [Releases](https://github.com/snyderman3000/panelattack-miyoo/releases).
-2. Extract it and copy the `App` folder to the root of your SD card, merging it with the `App` folder already there. When updating, delete `App/PanelAttack` first but keep its `data` folder (your name, settings and replays).
-3. Open **Apps → Panel Attack**. For online play, turn Wi-Fi on and set a name first.
+2. Extract it and copy the `Roms` folder to the root of your SD card, merging it with the `Roms` folder already there. Coming from a version before 0.9.0 (which lived in Apps)? The first launch moves your settings over and removes the old Apps entry.
+3. Open **Games → Ports → Panel Attack**. (The Ports list needs OnionOS's "Ports" system from Package Manager → Verified.) For online play, turn Wi-Fi on and set a name first.
 
 Requires OnionOS on a Miyoo Mini Plus. Online play needs the Plus (or another Wi-Fi model).
 

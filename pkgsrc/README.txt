@@ -4,8 +4,11 @@ https://github.com/snyderman3000/panelattack-miyoo
 This is an unofficial, MODIFIED version of Panel Attack, made for the Miyoo
 Mini Plus and not affiliated with the Panel Attack team. See game/MODIFIED.txt.
 
-Install: copy the App folder to the root of the SD card (or install it with
-Mixtape). Launch "Panel Attack" from Apps.
+Install: copy the Roms folder to the root of the SD card (or install it with
+Mixtape). Launch "Panel Attack" from Games > Ports (OnionOS needs the
+"Ports" system, from Package Manager > Verified, to show the Ports list).
+Versions before 0.9.0 were in Apps; the first launch of this one moves your
+settings over and removes the old Apps entry.
 
 Controls
   D-pad          move cursor / menus
@@ -21,8 +24,8 @@ over Wi-Fi. The first time, set a name with the on-screen keyboard
 (D-pad move, A type, B delete, X case, START done).
 
 Volume: use the handheld's volume buttons, or Options > Audio.
-Saves and settings live in PanelAttack/data. The log of the last run is
-PanelAttack/log.txt; please attach it to bug reports.
+Saves and settings live in Roms/PORTS/Games/PanelAttack/data. The log of the last run is
+Roms/PORTS/Games/PanelAttack/log.txt; please attach it to bug reports.
 
 Panel Attack is free software (zlib license): https://github.com/panel-attack/panel-game
 Panel Attack's license and asset credits: game/COPYING, game/COPYING-ASSETS.

@@ -1,0 +1,3 @@
+#!/bin/sh
+# Panel Attack for Miyoo Mini Plus (https://github.com/snyderman3000/panelattack-miyoo)
+/mnt/SDCARD/Roms/PORTS/Games/PanelAttack/launch.sh

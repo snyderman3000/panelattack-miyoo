@@ -1,0 +1,3 @@
+- Panel Attack is now in **Games → Ports** instead of Apps. Coming from an older version, the first launch moves your name, settings and replays over and removes the old Apps entry. (The Ports list needs OnionOS's "Ports" system from Package Manager → Verified.)
+- Fixed music and sounds playing about 9% fast (slightly high-pitched): OnionOS's audio always runs at 48 kHz, and the game now does too.
+- Uses OnionOS's own sound library, so add-ons that work with it (like MiniAmp's music in games) work in Panel Attack too.
