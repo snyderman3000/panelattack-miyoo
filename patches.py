@@ -100,6 +100,9 @@ Attack team. This port never sends crash reports to the Panel Attack server.
 Changes compared with the original source:
 - main.lua was renamed to pa_main.lua; a new main.lua and conf.lua start the
   Miyoo layer first.
+- Added: a Records screen on the main menu (miyoo/records.lua), which saves
+  extra records in miyoo_records.json; Panel Attack's own scores.json and
+  analytics.json are only read.
 - Added: miyoo/ (renderer bindings, graphics/input/audio replacements,
   handheld UI, on-screen keyboard, runtime patches) and the fonts in miyoo/fonts.
 - Crash reports are not sent to the Panel Attack server, and the crash

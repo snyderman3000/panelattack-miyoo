@@ -164,6 +164,7 @@ local MAIN_NAMES = {
   mm_1_challenge_mode = { "Challenge", "vs CPU" },
   mm_2_vs_online = { "Online", "panelattack.com" },
   mm_replay_browser = { "Replays" },
+  Records = { "Records" },
   mm_configure = { "Controls" },
   mm_set_name = { "Set Name" },
   mm_options = { "Options" },
@@ -275,6 +276,16 @@ function M.install()
       -- Online play is off unless online.cfg says "online = on" (launch.sh exports PA_ONLINE)
       if key == "mm_2_vs_online" and os.getenv("PA_ONLINE") ~= "on" then menu:removeMenuItem(it.id) end
     end
+    -- Records screen (miyoo/records.lua), right after Replays
+    local at = #menu.menuItems + 1
+    for i, it in ipairs(menu.menuItems) do
+      local key = it.textButton and it.textButton.label and it.textButton.label.text
+      if key == "mm_replay_browser" then at = i + 1 end
+    end
+    menu:addMenuItem(at, ui.MenuItem.createButtonMenuItem("Records", nil, false, function()
+      GAME.theme:playValidationSfx()
+      GAME.navigationStack:push(require("miyoo.records").RecordsScene())
+    end))
     return menu
   end
   MainMenu.draw = mainMenuDraw

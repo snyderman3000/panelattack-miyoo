@@ -25,8 +25,8 @@ Screenshots show Panel Attack art (panels by April93, public domain; characters 
 - **Endless, Time Attack, Vs Yourself, Puzzles, Training and Challenge** modes.
 - **60 fps** on the Mini Plus thanks to a custom 2D renderer (no GPU needed).
 - **A UI made for the 640×480 screen**: both boards side by side with a centre info column, bigger text, a menu built for a D-pad, and an on-screen keyboard for your name.
+- **Records screen** (added by this port, not in the original game): best and last scores for every Endless and Time Attack setting in both styles, best Vs CPU times with stage splits, Vs Yourself records and lifetime stats such as your biggest chain. Saved in `data/miyoo_records.json`.
 - **Mixtape support**: install and update it from [Mixtape](https://github.com/snyderman3000/mixtape) over Wi-Fi.
-
 - **Sound and music**, through OnionOS's audio service.
 
 Not supported: local 2-player.

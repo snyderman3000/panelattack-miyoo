@@ -60,6 +60,7 @@ do
   require("miyoo.menus").install()
   require("miyoo.charselect").install()
   require("miyoo.lobby").install()
+  require("miyoo.records").install()
 end
 
 -- 4c) Sound: Panel Attack's default volumes (50% master x 50% music/SFX) are
